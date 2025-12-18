@@ -18,7 +18,7 @@ func NewOutboxRepository(exec db.ISqlExecutor) *OutboxRepository {
 }
 
 func (r *OutboxRepository) AddEvent(ctx context.Context, dto models.Event) error {
-	query := `INSERT INTO outbox (id, type, payload, source) VALUES ($1, $2, $3)`
+	query := `INSERT INTO outbox (id, type, payload, source) VALUES ($1, $2, $3, $4)`
 	_, err := r.exec.ExecContext(ctx, query, dto.ID, dto.Type, dto.Payload, dto.Source)
 	return err
 }
