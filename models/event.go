@@ -6,11 +6,11 @@ import (
 	"time"
 )
 
-type EventType int
+type EventType string
 
 const (
 	// SignRequestedEvent порождающий цепочку последующих событий подписания документа
-	SignRequestedEvent EventType = iota
+	SignRequestedEvent EventType = "signrequested"
 )
 
 // Event описывает тип, время и параметры определенного события

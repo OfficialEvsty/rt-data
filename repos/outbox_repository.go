@@ -7,6 +7,7 @@ import (
 	"github.com/OfficialEvsty/rt-data/models"
 	repos "github.com/OfficialEvsty/rt-data/repos/interface"
 	"github.com/google/uuid"
+	"github.com/lib/pq"
 	"log"
 )
 
@@ -75,6 +76,15 @@ func (r *OutboxRepository) GetUnpublish(ctx context.Context, maxEntries int) (ev
 	}
 	return events, nil
 }
+
+func (r *OutboxRepository) InitPublishBatch(ctx context.Context, ids []uuid.UUID) error {
+	query := `UPDATE outbox
+ 			  SET published_at = NOW()
+ 			  WHERE id = ANY($1)`
+	_, err := r.exec.ExecContext(ctx, query, pq.Array(ids))
+	return err
+}
+
 func (r *OutboxRepository) WithTx(tx *sql.Tx) repos.IOutboxRepository {
 	return &OutboxRepository{tx}
 }
