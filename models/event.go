@@ -10,9 +10,11 @@ type EventType string
 
 const (
 	// SignRequestedEvent порождающий цепочку последующих событий подписания документа
-	SignRequestedEvent        EventType = "signrequested"
-	DocumentGeneratedEvent    EventType = "documentgenerated"
-	ServiceSignRequestedEvent EventType = "servicesignrequested"
+	SignRequestedEvent                   EventType = "signrequested"
+	DocumentGeneratedEvent               EventType = "documentgenerated"
+	ServiceSignRequestedEvent            EventType = "servicesignrequested"
+	ServiceVerifySignatureRequestedEvent EventType = "serviceverifysignaturerequested"
+	DocumentDeliveredEvent               EventType = "documentdelivered"
 )
 
 // Event описывает тип, время и параметры определенного события
